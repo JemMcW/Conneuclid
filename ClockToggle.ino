@@ -19,33 +19,37 @@
 // File: ClockToggle.ino
 // Functions to handle Clock Source Toggle (Int/Ext)
 //
-// Author: Israel Roth
+// Original Author: Israel Roth
 // Date: May 28, 2021
-//
+// 
+// Modified by: Jemison W.
+// Date: Sep 14, 2023
 //---------------------------------------------------------
 
 #define CLK_SRC_PIN      12
 
 int last_toggle_val = LOW;
 
-void ClockToggleSetup() {
-  pinMode(CLK_SRC_PIN, INPUT_PULLUP);
-  int last_toggle_val = digitalRead(CLK_SRC_PIN);
-  clock_source = last_toggle_val == LOW ? CLK_SRC_INT : CLK_SRC_INT;
+void ClockToggleSetup()
+{
+	pinMode(CLK_SRC_PIN, INPUT_PULLUP);
+	int last_toggle_val = digitalRead(CLK_SRC_PIN);
+	clock_source = last_toggle_val == LOW ? CLK_SRC_INT : CLK_SRC_INT;
 }
 
-void handleClockToggle() {
-  int sensorValue = digitalRead(CLK_SRC_PIN);
-  if (sensorValue == last_toggle_val) {
-    return;
-  }
-  last_toggle_val = sensorValue;
-  if (sensorValue == LOW) {
-    clock_source = CLK_SRC_INT;
-    clockToInternal();
-  }
-  else {
-    clock_source = CLK_SRC_EXT;
-    clockToExternal();
-  }
+void handleClockToggle()
+{
+	int sensorValue = digitalRead(CLK_SRC_PIN);
+	if (sensorValue == last_toggle_val)
+	{
+		return;
+	}
+	last_toggle_val = sensorValue;
+	if (sensorValue == LOW)
+	{
+		for (int i = 0; i < NUM_CHANNELS; i++)
+		{
+			gSeqNoteIndex[i] = 0;
+		}
+	}
 }

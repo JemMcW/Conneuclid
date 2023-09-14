@@ -25,10 +25,9 @@
 //---------------------------------------------------------
 
 //--------------- Rotary Encoder Stuff --------------------
-#define PIN_ENCODER_A      7
-#define PIN_ENCODER_B      8
-#define PIN_ENCODER_SWITCH 9
+
 #define LONG_PRESS_TIME    800
+
 static uint8_t enc_prev_pos   = 0;
 static uint8_t enc_flags      = 0;
 int lastState = LOW;
@@ -79,13 +78,14 @@ void handleRotaryInc() {
         }
         anyChange = true;        
       }
-      break;      
+      break;
     case EDIT_MODE_ACTIVE_BEATS:
+
       if(pattern_nactive[curChannel] < pattern_length[curChannel]) {
         pattern_nactive[curChannel]++;
         anyChange = true;
       }
-      break;      
+      break;
     case EDIT_MODE_OFFSET:
       pattern_offset[curChannel]--;
       if (pattern_offset[curChannel] < 0) {
@@ -116,13 +116,15 @@ void handleRotaryDec() {
         pattern_length[curChannel]++; 
         anyChange = true;       
       }
-      break;      
+      break;
+	  /*
     case EDIT_MODE_ACTIVE_BEATS:
       if(pattern_nactive[curChannel] > 0) {
         pattern_nactive[curChannel]--;
         anyChange = true;
       }
-      break;      
+      break;
+	  */
     case EDIT_MODE_OFFSET:
       pattern_offset[curChannel]++; 
       if (pattern_offset[curChannel] >= (pattern_length[curChannel])) {

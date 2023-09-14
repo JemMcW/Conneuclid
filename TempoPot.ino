@@ -24,25 +24,28 @@
 //
 //---------------------------------------------------------
 
-#define TEMPO_POT_PIN      A1
 int last_tempo_pot_value = 0;
 
-void setTempoFromPot(int val) {
-  curBPM = 20 + (1023-val) / 3;
+void setTempoFromPot(int val)
+{
+	curBPM = 20 + (1023 - val) / 3;
 //  Serial.println("Set Tempo: "+ curBPM);
-  setTempo();
+	setTempo();
 }
 
-void TempoPotSetup() {
-  last_tempo_pot_value = stableAnalogRead(TEMPO_POT_PIN);
-  setTempoFromPot(last_tempo_pot_value);
+void TempoPotSetup()
+{
+	last_tempo_pot_value = stableAnalogRead(TEMPO_POT_PIN);
+	setTempoFromPot(last_tempo_pot_value);
 }
 
-void handleTempoPot() {
-  int sensorValue = stableAnalogRead(TEMPO_POT_PIN);
-  if (abs(sensorValue-last_tempo_pot_value) < 5) {
-    return;
-  }
-  last_tempo_pot_value = sensorValue;
-  setTempoFromPot(last_tempo_pot_value);
+void handleTempoPot()
+{
+	int sensorValue = stableAnalogRead(TEMPO_POT_PIN);
+	if (abs(sensorValue - last_tempo_pot_value) < 5)
+	{
+		return;
+	}
+	last_tempo_pot_value = sensorValue;
+	setTempoFromPot(last_tempo_pot_value);
 }

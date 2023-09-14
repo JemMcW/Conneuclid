@@ -26,11 +26,13 @@
 
 #define NUM_READS     10
 
-int stableAnalogRead(int pin) {
-  int sum = 0;
-  for (int i = 0 ; i < NUM_READS ; i++) {
-    sum += analogRead(pin);
-  }
-  sum = sum / NUM_READS;
-  return sum;
+int stableAnalogRead(int pin)
+{
+	int sum = 0;
+	for (int i = 0; i < NUM_READS; i++)
+	{
+		sum += analogRead(pin);
+	}
+	sum = sum / NUM_READS;
+	return sum;
 }
