@@ -37,7 +37,7 @@ void HandleNumBeatsPots()
 void SetNumBeatsFromPot(int channel)
 {
 	int potReading = stableAnalogRead(numBeatsPotsPins[channel]); // 0-1023
-	int numBeats = (potReading + 1) / 64 - 8;
+	int numBeats = (potReading + 8) / 64;
 
 	if (numBeats != numBeatsPrevPotValues[channel])
 	{
